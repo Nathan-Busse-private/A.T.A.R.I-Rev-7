@@ -13,8 +13,6 @@ int PWM_A =10;     // Speed PWM Motor A
 int MB1 =  13;     // Motor B
 int MB2 =  8;      // Motor B
 int PWM_B =11;  // Speed PWM Motor B
-int light_FR = 12;    //LED Front Right   pin A0 for Arduino Uno
-int light_FL = 15;    //LED Front Left    pin A1 for Arduino Uno
 
 //int horn_Buzz = 4;
 //boolean horn = false;
@@ -54,8 +52,7 @@ pinMode(MB2, OUTPUT);   //Motor B2
 pinMode(PWM_B, OUTPUT); //Speed PWM Motor 
 //pinMode(horn_Buzz, OUTPUT);
 
-pinMode(light_FR, OUTPUT);
-pinMode(light_FL, OUTPUT);
+
     
 pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
 pinMode(echoPin, INPUT); // Sets the echoPin as an Input
@@ -104,14 +101,7 @@ speedCar;
 
 {
 
-case 'W':lightFront = true;break;
-Serial.println ("on");
-case 'w':lightFront = false;break;
-lightFront;
-light_FR;
-}
-break;
-{
+
 case 'S':
       
 
@@ -204,7 +194,7 @@ Serial.println("turn Left");
 break;
 case 'H':
 {
-forwardLeft(1);
+backLeft(1);
 Serial.println("turn Left");
 //lcd.setCursor(5,19);
 //lcd.println("Turning Right");
@@ -266,12 +256,12 @@ delay(time);
 
 void forwardRight (int time)
 {
-digitalWrite (MB1, LOW);
+digitalWrite (MB1, HIGH);
 digitalWrite (MB2, LOW);
-analogWrite(PWM_B, 0);
-digitalWrite (MA1, HIGH);
+analogWrite(PWM_B, 255);
+digitalWrite (MA1, LOW);
 digitalWrite (MA2, LOW);
-analogWrite(PWM_A, speedCar);
+analogWrite(PWM_A, 0);
 
 }
 
@@ -279,18 +269,13 @@ void backRight (int time)
 {
 digitalWrite (MB1, LOW);
 digitalWrite (MB2, HIGH);
-analogWrite(PWM_B, speedCar);
+analogWrite(PWM_B, 255);
 digitalWrite (MA1, LOW);
 digitalWrite (MA2, LOW);
 analogWrite(PWM_A, 0);
 
-  
-digitalWrite (MB1, LOW);
-digitalWrite (MB2, LOW);
-analogWrite(PWM_B, 0);
-digitalWrite (MA1, HIGH);
-digitalWrite (MA2, LOW);
-analogWrite(PWM_A, speedCar);
+
+
 }
 
 void forwardLeft (int time)
@@ -299,19 +284,19 @@ void forwardLeft (int time)
 digitalWrite (MB1, LOW);
 digitalWrite (MB2, LOW);
 analogWrite(PWM_B, 0);
-digitalWrite (MA1, LOW);
-digitalWrite (MA2, HIGH);
-analogWrite(PWM_A, speedCar);
+digitalWrite (MA1, HIGH);
+digitalWrite (MA2, LOW);
+analogWrite(PWM_A, 255);
 }
 
 void backLeft (int time)
 {
 digitalWrite (MB1, LOW);
-digitalWrite (MB2, HIGH);
-analogWrite(PWM_B, speedCar);
+digitalWrite (MB2, LOW);
+analogWrite(PWM_B, 0);
 digitalWrite (MA1, LOW);
-digitalWrite (MA2, LOW);
-analogWrite(PWM_A, 0);
+digitalWrite (MA2, HIGH);
+analogWrite(PWM_A, 255);
 
 }
 
@@ -325,9 +310,6 @@ analogWrite(PWM_A, 0);
 digitalWrite(MB1, LOW);
 digitalWrite(MB2, LOW);
 analogWrite(PWM_B, 0);
-digitalWrite(light_FR, HIGH); 
-digitalWrite(light_FL, HIGH);
-digitalWrite(light_FR, LOW); 
-digitalWrite(light_FL, LOW);
+
 delay(time);
 }
